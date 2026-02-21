@@ -50,9 +50,16 @@ const incbtn = document.querySelector("#inc-btn");
 const decbtn = document.querySelector("#dec-btn");
 const counterValue = document.querySelector("#counter-value");
 
-// incbtn.addEventListener("click" , () => {
-//  const Value = counterValue.value++
-// })
+incbtn.addEventListener("click" , () => {
+ let Value = Number(counterValue.innerText);
+ Value++;
+ counterValue.innerText = Value ;
+})
+decbtn.addEventListener("click" , () => {
+ let Value = Number(counterValue.innerText);
+ Value--;
+ counterValue.innerText = Value ;
+})
 
 // ----------------------------------------------------------
 
@@ -85,20 +92,33 @@ loginBtn.addEventListener("click", () => {
 
 // ------------------------------------------------------------
 
-// const shoppingList = document.getElementById("shopping-list");
-// const itemInput = document.getElementById("item-input");
-// const addItemBtn = document.getElementById("add-item-btn");
-// addItemBtn.addEventListener("click", (event) => {
-//   const value = itemInput.value;
-//   if (value === "") {
-//     alert("Please enter a task!");
-//     return;
-//   }
-//   const newListItem = document.createElement("li");
-//   newListItem.innerText = value;
-//   shoppingList.value.appendChild(newListItem);
-//  itemInput.value = "";
-// });
+const shoppingList = document.getElementById("shopping-list");
+const itemInput = document.getElementById("item-input");
+const addItemBtn = document.getElementById("add-item-btn");
+addItemBtn.addEventListener("click", (event) => {
+  const value = itemInput.value;
+  if (value === "") {
+    alert("Please enter a task!");
+    return;
+  }
+  const newListItem = document.createElement("li");
+  newListItem.innerText = value;
+  shoppingList.appendChild(newListItem);
+ itemInput.value = "";
+});
 
 
 // --------------------------------------------------------------
+ const secretMsg = document.getElementById("secret-msg")
+ const toggleMsgBtn = document.getElementById("toggle-msg-btn")
+
+ toggleMsgBtn.addEventListener("click" , () => {
+  // secretMsg.style.color = "red"
+  if(toggleMsgBtn.innerText === "Hide Message"){
+    toggleMsgBtn.innerText = "Show Message"
+    secretMsg.style.display = "none";
+  }else {
+    secretMsg.style.display = "";
+    toggleMsgBtn.innerText = "Hide Message"
+  }
+ })
