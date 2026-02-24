@@ -3,7 +3,7 @@
 // // Select the button with id btn-1.
 // // When clicked, change the text of h1 (id="main-heading") to "Welcome to the DOM!".
 
-const { createElement } = require("react");
+// const { createElement } = require("react");
 
 // const btn1 = document.getElementById("btn-1");
 // const heading = document.getElementById("main-heading");
@@ -174,14 +174,14 @@ const { createElement } = require("react");
 
 //  ====================================================================================================================
 
-const questions = [
-  { text: "What is 2+2?", answer: "4", options: ["2", "4", "5", "6"] },
-  {
-    text: "Capital of India?",
-    answer: "Delhi",
-    options: ["Mumbai", "Delhi", "Goa", "Pune"],
-  },
-];
+// const questions = [
+//   { text: "What is 2+2?", answer: "4", options: ["2", "4", "5", "6"] },
+//   {
+//     text: "Capital of India?",
+//     answer: "Delhi",
+//     options: ["Mumbai", "Delhi", "Goa", "Pune"],
+//   },
+// ];
 
 // const questions = [
 //   { text: "What is 2 + 2?", answer: "4", options: ["2", "4", "5", "6"] },
@@ -266,22 +266,65 @@ const questions = [
 
 // ==================================================================================================================
 
-let cart = [];
 
-function addToCart(name, price) {
-  cart.push({ name: name, price: price });
 
-  let cartlist = document.getElementById("cart-list");
-  cartlist.innerHTML = "";
+// let cart = [];
+//  let addToCart = (name , price) => {
+//   cart.push({name : name , price : price })
+//   let cartList = document.getElementById("cart-list")
+//   cartList.innerText = "";
+//   for (let i = 0 ; i < cart.length ; i++){
+//     let li = document.createElement("li");
+//     li.textContent = cart[i].name + "$" + cart[i].price;
+//     cartList.appendChild(li)
+//   }
+//   let total = 0;
+//   for(let i = 0 ; i < cart.length ; i++){
+//     total += cart[i].price
+//   }
+//   document.getElementById("total-price").textContent = total;
+//  }
 
-  for (let i = 0; i < cart.length; i++) {
-    let li = document.createElement("li");
-    li.textContent = cart[i].name + " -$" + cart[i].price;
-    cartlist.appendChild(li);
-  }
-  let total = 0;
-  for (let i = 0; i < cart.length; i++) {
-    total = total + cart[i].price;
-  }
-  document.getElementById("total-price").textContent = total;
+// ===========================================================================
+
+
+const submitBtn = document.getElementById("submit-btn");
+const username = document.getElementById("username");
+const userError = document.getElementById("user-error");
+
+const password = document.getElementById("pass");
+const passError = document.getElementById("pass-error");
+const confirmPass = document.getElementById("confirm-pass");
+const matchError = document.getElementById("match-error");
+
+function validateForm() {
+    let isValid = true;
+    if (username.value.length < 5) {
+        userError.style.display = 'block';
+        isValid = false;
+    } else {
+        userError.style.display = 'none';
+    }
+    if (password.value.length < 8) {
+        passError.style.display = 'block';
+        isValid = false;
+    } else {
+        passError.style.display = 'none';
+    }
+
+    if (password.value !== confirmPass.value || confirmPass.value === "") {
+        matchError.style.display = 'block';
+        isValid = false;
+    } else {
+        matchError.style.display = 'none';
+    }
+
+   if(isValid){
+    submitBtn.disabled = false;
+   }else {
+     submitBtn.disabled = true;
+   }
 }
+username.addEventListener('input', validateForm);
+password.addEventListener('input', validateForm);
+confirmPass.addEventListener('input', validateForm);
