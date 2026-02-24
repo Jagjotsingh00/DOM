@@ -288,43 +288,66 @@
 // ===========================================================================
 
 
-const submitBtn = document.getElementById("submit-btn");
-const username = document.getElementById("username");
-const userError = document.getElementById("user-error");
+// const submitBtn = document.getElementById("submit-btn");
+// const username = document.getElementById("username");
+// const userError = document.getElementById("user-error");
 
-const password = document.getElementById("pass");
-const passError = document.getElementById("pass-error");
-const confirmPass = document.getElementById("confirm-pass");
-const matchError = document.getElementById("match-error");
+// const password = document.getElementById("pass");
+// const passError = document.getElementById("pass-error");
+// const confirmPass = document.getElementById("confirm-pass");
+// const matchError = document.getElementById("match-error");
 
-function validateForm() {
-    let isValid = true;
-    if (username.value.length < 5) {
-        userError.style.display = 'block';
-        isValid = false;
-    } else {
-        userError.style.display = 'none';
-    }
-    if (password.value.length < 8) {
-        passError.style.display = 'block';
-        isValid = false;
-    } else {
-        passError.style.display = 'none';
-    }
+// function validateForm() {
+//     let isValid = true;
+//     if (username.value.length < 5) {
+//         userError.style.display = 'block';
+//         isValid = false;
+//     } else {
+//         userError.style.display = 'none';
+//     }
+//     if (password.value.length < 8) {
+//         passError.style.display = 'block';
+//         isValid = false;
+//     } else {
+//         passError.style.display = 'none';
+//     }
 
-    if (password.value !== confirmPass.value || confirmPass.value === "") {
-        matchError.style.display = 'block';
-        isValid = false;
-    } else {
-        matchError.style.display = 'none';
-    }
+//     if (password.value !== confirmPass.value || confirmPass.value === "") {
+//         matchError.style.display = 'block';
+//         isValid = false;
+//     } else {
+//         matchError.style.display = 'none';
+//     }
 
-   if(isValid){
-    submitBtn.disabled = false;
-   }else {
-     submitBtn.disabled = true;
-   }
+//    if(isValid){
+//     submitBtn.disabled = false;
+//    }else {
+//      submitBtn.disabled = true;
+//    }
+// }
+// username.addEventListener('input', validateForm);
+// password.addEventListener('input', validateForm);
+// confirmPass.addEventListener('input', validateForm);
+
+
+
+// =================================================================================================================================
+
+
+const usernameField = document.getElementById("username");
+const passwordField = document.getElementById("pass")
+const confirmPasswordField = document.getElementById("confirm-pass")
+
+const validateForm = () => {
+  let username = usernameField.value;
+  let password = passwordField.value;
+  let confirmPassword = confirmPasswordField.value;
+  
+  console.log("hello" , username ,password ,confirmPassword);
 }
-username.addEventListener('input', validateForm);
-password.addEventListener('input', validateForm);
-confirmPass.addEventListener('input', validateForm);
+
+usernameField.addEventListener("input" , validateForm)
+passwordField.addEventListener("input" ,validateForm)
+confirmPasswordField.addEventListener("input" , validateForm)
+
+
