@@ -268,22 +268,22 @@
 
 
 
-// let cart = [];
-//  let addToCart = (name , price) => {
-//   cart.push({name : name , price : price })
-//   let cartList = document.getElementById("cart-list")
-//   cartList.innerText = "";
-//   for (let i = 0 ; i < cart.length ; i++){
-//     let li = document.createElement("li");
-//     li.textContent = cart[i].name + "$" + cart[i].price;
-//     cartList.appendChild(li)
-//   }
-//   let total = 0;
-//   for(let i = 0 ; i < cart.length ; i++){
-//     total += cart[i].price
-//   }
-//   document.getElementById("total-price").textContent = total;
-//  }
+let cart = [];
+ let addToCart = (name , price) => {
+  cart.push({name : name , price : price })
+  let cartList = document.getElementById("cart-list")
+  cartList.innerText = "";
+  for (let i = 0 ; i < cart.length ; i++){
+    let li = document.createElement("li");
+    li.textContent = cart[i].name + "$" + cart[i].price;
+    cartList.appendChild(li)
+  }
+  let total = 0;
+  for(let i = 0 ; i < cart.length ; i++){
+    total += cart[i].price
+  }
+  document.getElementById("total-price").textContent = total;
+ }
 
 // ===========================================================================
 

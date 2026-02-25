@@ -129,6 +129,9 @@ If hidden -> Show it and change button text to "Hide Message".
 </div>
 <hr>
 
+================================================================================================================================================
+
+
 <div id="products">
     <button onclick="addToCart('Laptop', 50000)">Add Laptop (50k)</button>
     <button onclick="addToCart('Mobile', 20000)">Add Mobile (20k)</button>
@@ -139,6 +142,7 @@ If hidden -> Show it and change button text to "Hide Message".
 <h4>Total Bill: ₹<span id="total-price">0</span></h4>
 <hr>
 
+=============================================================================================================
 <div class="tabs">
     <button class="tab-btn" data-target="home">Home</button>
     <button class="tab-btn" data-target="profile">Profile</button>
@@ -148,6 +152,7 @@ If hidden -> Show it and change button text to "Hide Message".
 <div id="profile" class="content-box hidden">User Profile: Jagjot 👤</div>
 <div id="settings" class="content-box hidden">Settings Area ⚙️</div>
 <hr>
+======================================================================================================
 
 <input type="text" id="task-input" placeholder="New Task...">
 <button id="add-task-btn">Add</button>
@@ -157,7 +162,7 @@ If hidden -> Show it and change button text to "Hide Message".
 <button id="show-active-btn">Show Active</button>
 <ul id="filter-task-list"></ul>
 <hr>
-
+===================================================================================================================
 <form id="signup-form">
     <input type="text" id="username" placeholder="Username (min 5 chars)"><br>
     <span id="user-error" style="color: red; display: none;">Too short!</span><br>
@@ -170,7 +175,7 @@ If hidden -> Show it and change button text to "Hide Message".
     
     <button id="submit-btn" disabled>Sign Up</button>
 </form>
-
+================================================================================================
 The Quiz App 
 • Data: Create an array of questions:
 JavaScript
@@ -184,7 +189,6 @@ Create a function loadQuestion() that updates the h3 text and the 4 buttons.
 When a button is clicked, check if the text matches the answer.
 If Correct: Increase Score, Alert "Correct!", and move to the next index.
 If Wrong: Alert "Wrong!".
-
 
 
 =========================================================================================================================
