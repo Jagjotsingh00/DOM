@@ -76,3 +76,4 @@ buttons.forEach((i) => {                                  // fetching each butto
   e.target.classList.add("active");
   });
 });
+

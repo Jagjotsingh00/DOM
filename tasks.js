@@ -265,7 +265,7 @@
 // loadQuestion();
 
 // ==================================================================================================================
-
+let ul = document.getElementById("cart-list")
 
 
 let cart = [];
@@ -284,6 +284,11 @@ let cart = [];
   }
   document.getElementById("total-price").textContent = total;
  }
+ul.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    event.target.remove(); 
+  }
+});
 
 // ===========================================================================
 

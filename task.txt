@@ -64,6 +64,8 @@ HTML Code:
 </body>
 </html>
 
+==========================================================================================================
+
 TASKS:
 • The Text Changer
 Select the button with id btn-1.
@@ -113,11 +115,7 @@ When clicked, check if the message is visible.
 If visible -> Hide it and change button text to "Show Message".
 If hidden -> Show it and change button text to "Hide Message".
 
-
-
-===================================================================================================================================
-
-
+-------------------------------------------------------------------------------------------------------------
 
 <div id="quiz-container">
     <h3 id="question-text">Question goes here...</h3>
@@ -129,7 +127,7 @@ If hidden -> Show it and change button text to "Hide Message".
 </div>
 <hr>
 
-================================================================================================================================================
+-------------------------------------------------------------------------------------------------------------
 
 
 <div id="products">
@@ -142,7 +140,8 @@ If hidden -> Show it and change button text to "Hide Message".
 <h4>Total Bill: ₹<span id="total-price">0</span></h4>
 <hr>
 
-=============================================================================================================
+-------------------------------------------------------------------------------------------------------------
+
 <div class="tabs">
     <button class="tab-btn" data-target="home">Home</button>
     <button class="tab-btn" data-target="profile">Profile</button>
@@ -152,7 +151,8 @@ If hidden -> Show it and change button text to "Hide Message".
 <div id="profile" class="content-box hidden">User Profile: Jagjot 👤</div>
 <div id="settings" class="content-box hidden">Settings Area ⚙️</div>
 <hr>
-======================================================================================================
+
+-------------------------------------------------------------------------------------------------------------
 
 <input type="text" id="task-input" placeholder="New Task...">
 <button id="add-task-btn">Add</button>
@@ -162,7 +162,8 @@ If hidden -> Show it and change button text to "Hide Message".
 <button id="show-active-btn">Show Active</button>
 <ul id="filter-task-list"></ul>
 <hr>
-===================================================================================================================
+-----------------------------------------------------------------------------------------------
+
 <form id="signup-form">
     <input type="text" id="username" placeholder="Username (min 5 chars)"><br>
     <span id="user-error" style="color: red; display: none;">Too short!</span><br>
@@ -175,7 +176,9 @@ If hidden -> Show it and change button text to "Hide Message".
     
     <button id="submit-btn" disabled>Sign Up</button>
 </form>
+
 ================================================================================================
+
 The Quiz App 
 • Data: Create an array of questions:
 JavaScript
@@ -190,8 +193,67 @@ When a button is clicked, check if the text matches the answer.
 If Correct: Increase Score, Alert "Correct!", and move to the next index.
 If Wrong: Alert "Wrong!".
 
+/* --- TASK 11: QUIZ APP --- */
+const questions = [
+    { text: "What is 2 + 2?", answer: "4", options: ["2", "4", "5", "6"] },
+    { text: "Capital of India?", answer: "Delhi", options: ["Mumbai", "Delhi", "Goa", "Pune"] },
+    { text: "Best JS Library?", answer: "React", options: ["React", "Java", "Python", "C++"] }
+];
 
-=========================================================================================================================
+*****************************************
+let currentQIndex = 0;
+let score = 0;
+
+// HTML Elements
+const questionText = document.getElementById("question-text");
+const answerBtns = document.querySelectorAll(".answer-btn");
+const scoreText = document.getElementById("quiz-score");
+
+function loadQuestion() {
+    const currentQ = questions[currentQIndex];
+    questionText.innerText = currentQ.text;
+
+    // Update buttons
+    answerBtns.forEach((btn, index) => {
+        btn.innerText = currentQ.options[index];
+        
+        // Remove old event listeners (Clone node trick to clear old clicks)
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        
+        // Add new click listener
+        newBtn.addEventListener("click", () => checkAnswer(currentQ.options[index]));
+    });
+}
+
+function checkAnswer(selectedOption) {
+    const correctOption = questions[currentQIndex].answer;
+    
+    if (selectedOption === correctOption) {
+        alert("Correct! :white_check_mark:");
+        score++;
+    } else {
+        alert("Wrong! :x: Answer was: " + correctOption);
+    }
+
+    scoreText.innerText = "Score: " + score;
+    currentQIndex++; // Move to next question
+
+    // Check if quiz is over
+    if (currentQIndex < questions.length) {
+        loadQuestion();
+    } else {
+        alert("Quiz Over! Final Score: " + score);
+        currentQIndex = 0; // Reset
+        score = 0;
+        loadQuestion();
+    }
+}
+
+// Start the quiz
+loadQuestion();
+
+--------------------------------------------------------------------------------------------------------------------
 
 12. The Shopping Cart (Objects + Math)
 • Data: Create an empty array cart = [].
@@ -201,6 +263,42 @@ Create a function addToCart(name, price).
 Push an object { name: name, price: price } into the cart array.
 Render: Loop through the cart array, create <li> tags for each item, and append them to cart-list.
 Calculate: Use a loop to calculate the total price and update the #total-price span.
+
+***********************************************************
+
+/* --- TASK 12: SHOPPING CART --- */
+let cart = []; // Array to store items
+
+function addToCart(name, price) {
+    // 1. Add object to array
+    cart.push({ name: name, price: price });
+    
+    // 2. Update the UI
+    renderCart();
+}
+
+function renderCart() {
+    const cartList = document.getElementById("cart-list");
+    const totalSpan = document.getElementById("total-price");
+    
+    // Clear list to avoid duplicates
+    cartList.innerHTML = "";
+    
+    let total = 0;
+
+    cart.forEach((item) => {
+        // Create List Item
+        const li = document.createElement("li");
+        li.innerText = `${item.name} - ₹${item.price}`;
+        cartList.appendChild(li);
+        
+        // Add to total
+        total += item.price;
+    });
+
+    // Update Total Text
+    totalSpan.innerText = total;
+}
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -215,6 +313,33 @@ Step 2: Remove "active" class from ALL buttons.
 Step 3: Show ONLY the box that matches the button's data-target (remove .hidden).
 Step 4: Add "active" class to the clicked button.
 
+****************************************************************
+
+/* --- TASK 13: TABS --- */
+const tabButtons = document.querySelectorAll(".tab-btn");
+const contents = document.querySelectorAll(".content-box");
+
+tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        
+        // 1. Remove 'active' class from ALL buttons
+        tabButtons.forEach(b => b.style.backgroundColor = ""); 
+        // (Or use classList.remove('active') if you have CSS)
+
+        // 2. Hide ALL content boxes
+        contents.forEach(box => box.classList.add("hidden"));
+
+        // 3. Show ONLY the target box
+        const targetId = btn.getAttribute("data-target");
+        document.getElementById(targetId).classList.remove("hidden");
+
+        // 4. Highlight the clicked button
+        btn.style.backgroundColor = "lightgray"; 
+    });
+});
+
+---------------------------------------------------------------------------------------------------------------
+
 14. The Task Filter (Array Filtering)
 • Data: let tasks = [{ text: "Learn JS", completed: false }];
 • Logic:
@@ -226,7 +351,64 @@ Filter:
 "Show Completed" button: Uses tasks.filter(t => t.completed).
 "Show All": Renders the whole array.
 
+**********************************************************
 
+/* --- TASK 14: TASK FILTER --- */
+let tasks = [];
+
+const taskInput = document.getElementById("task-input");
+const addTaskBtn = document.getElementById("add-task-btn");
+const taskListUl = document.getElementById("filter-task-list");
+
+// Add Task
+addTaskBtn.addEventListener("click", () => {
+    if(taskInput.value === "") return;
+    
+    tasks.push({ text: taskInput.value, completed: false });
+    taskInput.value = "";
+    renderTasks("all"); // Show all by default
+});
+
+// Render Function (The Brain)
+function renderTasks(filterType) {
+    taskListUl.innerHTML = ""; // Clear current list
+
+    // Filter the array based on button clicked
+    let filteredTasks = tasks;
+    if (filterType === "active") {
+        filteredTasks = tasks.filter(t => !t.completed);
+    } else if (filterType === "completed") {
+        filteredTasks = tasks.filter(t => t.completed);
+    }
+
+    // Loop and Display
+    filteredTasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.innerText = task.text;
+        
+        // If completed, cross it out
+        if (task.completed) {
+            li.style.textDecoration = "line-through";
+        }
+
+        // Toggle completion on click
+        li.addEventListener("click", () => {
+            // Find the original task in the main array and flip it
+            // (Using reference or finding by text/index)
+            task.completed = !task.completed; 
+            renderTasks(filterType); // Re-render to show changes
+        });
+
+        taskListUl.appendChild(li);
+    });
+}
+
+// Button Listeners
+document.getElementById("show-all-btn").addEventListener("click", () => renderTasks("all"));
+document.getElementById("show-active-btn").addEventListener("click", () => renderTasks("active"));
+document.getElementById("show-completed-btn").addEventListener("click", () => renderTasks("completed"));
+
+---------------------------------------------------------------------------------------------------------------
 
 15. The Live Form Validator (Events & Disabled Button)
 • Goal: The "Sign Up" button should stay Disabled (greyed out) until the form is valid.
@@ -237,3 +419,55 @@ Username Check: If length < 5, show #user-error.
 Password Check: If length < 8, show #pass-error.
 Match Check: If pass value !== confirm-pass value, show #match-error.
 Master Check: If ALL 3 are valid, set submitBtn.disabled = false. Otherwise, keep it true.
+
+
+***************************************************************************
+
+/* --- TASK 15: LIVE VALIDATOR --- */
+const userField = document.getElementById("username");
+const passField = document.getElementById("pass");
+const confirmField = document.getElementById("confirm-pass");
+const submitBtn = document.getElementById("submit-btn");
+
+// Errors
+const userErr = document.getElementById("user-error");
+const passErr = document.getElementById("pass-error");
+const matchErr = document.getElementById("match-error");
+
+function validateForm() {
+    let isValid = true;
+
+    // 1. Check Username
+    if (userField.value.length < 5) {
+        userErr.style.display = "inline";
+        isValid = false;
+    } else {
+        userErr.style.display = "none";
+    }
+
+    // 2. Check Password Length
+    if (passField.value.length < 8) {
+        passErr.style.display = "inline";
+        isValid = false;
+    } else {
+        passErr.style.display = "none";
+    }
+
+    // 3. Check Match
+    if (passField.value !== confirmField.value) {
+        matchErr.style.display = "inline";
+        isValid = false;
+    } else {
+        matchErr.style.display = "none";
+    }
+
+    // 4. Enable/Disable Button
+    submitBtn.disabled = !isValid; // If valid is true, disabled is false
+}
+
+// Attach listeners to ALL inputs
+userField.addEventListener("input", validateForm);
+passField.addEventListener("input", validateForm);
+confirmField.addEventListener("input", validateForm);
+
+---------------------------------------------------------------------------------------------------------------
